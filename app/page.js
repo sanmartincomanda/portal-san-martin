@@ -25,7 +25,7 @@ export default function Home() {
             <Link href="https://tienda.carnessanmartin.com" className="px-5 py-2.5 bg-red-600 hover:bg-red-700 rounded-lg text-sm font-bold transition">
               Tienda Virtual →
             </Link>
-            <Link href="https://hub.carnessanmartin.com" className="px-5 py-2.5 border border-red-600 hover:bg-red-600/10 rounded-lg text-sm font-bold transition">
+            <Link href="https://sanmartinsr.netlify.app/hub" className="px-5 py-2.5 border border-red-600 hover:bg-red-600/10 rounded-lg text-sm font-bold transition">
               Portal Interno
             </Link>
           </div>
