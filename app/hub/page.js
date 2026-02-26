@@ -9,7 +9,7 @@ export default function HubPage() {
       desc: 'Gestión de pedidos para delivery y ruta',
       icon: '📦',
       color: 'from-blue-600 to-blue-800',
-      url: 'https://sanmartinsr.netlify.app/',
+      url: 'https://verdant-youtiao-5cd9d3.netlify.app/',
       activo: true
     },
     {
@@ -27,7 +27,7 @@ export default function HubPage() {
       desc: 'Caja, reportes y administración',
       icon: '💰',
       color: 'from-green-600 to-green-800',
-      url: 'https://finanzas.distribuidoressr.com',
+      url: 'sistemacontablesanmartin.netlify.app',
       activo: true
     },
     {
