@@ -12,7 +12,7 @@ export default function Home() {
             {/* Logo Carnes San Martín */}
             <div className="relative w-16 h-16">
               <Image
-                src="/logo-sanmartin.svg" // Descargar de: https://sanmartin.com.ni/wp-content/uploads/2025/02/logo.svg
+                src="/logocsm.svg" // Descargar de: https://sanmartin.com.ni/wp-content/uploads/2025/02/logo.svg
                 alt="Carnes San Martín"
                 fill
                 className="object-contain"
@@ -105,31 +105,54 @@ export default function Home() {
             </div>
           </div>
 
-          {/* Video Reel Embed */}
+{/* Video Reel Embed - Versión Pro Propia */}
           <div className="hidden lg:block">
-            <div className="relative aspect-[9/16] max-w-sm mx-auto bg-neutral-800 rounded-3xl overflow-hidden border-4 border-neutral-700 shadow-2xl">
-              {/* Placeholder para el reel - reemplazar con video real */}
-              <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-red-900/40 to-neutral-900">
-                <Image
-                  src="/reel-cover.jpg" // Frame del reel: https://www.facebook.com/reel/1018669226937519
-                  alt="Reel Tienda Granada"
-                  fill
-                  className="object-cover opacity-80"
-                />
-                <a 
-                  href="https://www.facebook.com/reel/1018669226937519"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="absolute inset-0 flex items-center justify-center group"
+            <div className="relative group">
+              {/* Efecto de resplandor rojo detrás */}
+              <div className="absolute -inset-1 bg-red-600 rounded-[2rem] blur opacity-20 group-hover:opacity-40 transition duration-1000"></div>
+              
+              <div className="relative aspect-[9/16] max-w-sm mx-auto bg-neutral-900 rounded-[2rem] overflow-hidden border-4 border-neutral-800 shadow-2xl">
+                
+                {/* Video desde /public/ReelGranada.mp4 */}
+                <video
+                  autoPlay
+                  loop
+                  muted
+                  playsInline
+                  className="absolute inset-0 w-full h-full object-cover"
                 >
-                  <div className="w-20 h-20 bg-red-600 rounded-full flex items-center justify-center group-hover:scale-110 transition shadow-2xl">
-                    <svg className="w-8 h-8 text-white ml-1" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                  <source src="/ReelGranada.mp4" type="video/mp4" />
+                  Tu navegador no soporta videos.
+                </video>
+
+                {/* Capas de diseño sobre el video */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-transparent to-black/20" />
+
+                <div className="absolute top-6 left-6 z-10 flex items-center gap-2">
+                  <div className="w-8 h-8 bg-red-600 rounded-full flex items-center justify-center border border-white/20">
+                    <span className="text-[10px] font-black text-white">SR</span>
                   </div>
-                </a>
-              </div>
-              <div className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black to-transparent">
-                <p className="text-sm font-bold text-white">📍 Tienda Granada Gold</p>
-                <p className="text-xs text-neutral-300">Ver reel en Facebook</p>
+                  <span className="text-xs font-bold text-white drop-shadow-lg">Distribuidores SR</span>
+                </div>
+
+                {/* Texto Inferior informativo */}
+                <div className="absolute bottom-0 left-0 right-0 p-8 z-10">
+                  <div className="flex items-center gap-2 mb-3">
+                    <span className="relative flex h-2 w-2">
+                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
+                      <span className="relative inline-flex rounded-full h-2 w-2 bg-red-500"></span>
+                    </span>
+                    <span className="text-[10px] font-black text-red-500 uppercase tracking-widest">En Vivo - Granada</span>
+                  </div>
+                  
+                  <h3 className="text-xl font-black text-white mb-1 leading-tight">
+                    CALIDAD <span className="text-red-600">SAN MARTÍN</span>
+                  </h3>
+                  <p className="text-xs text-neutral-300">Sucursal Granada Gold</p>
+                </div>
+
+                {/* Barra de progreso decorativa inferior */}
+                <div className="absolute bottom-0 left-0 h-1 bg-red-600 w-2/3"></div>
               </div>
             </div>
           </div>
@@ -192,7 +215,7 @@ export default function Home() {
             <div className="group relative bg-neutral-900 rounded-3xl overflow-hidden border border-neutral-800 hover:border-red-600/50 transition">
               <div className="relative h-64">
                 <Image
-                  src="/tienda-granada-interior.jpg" // Foto interior tienda
+                  src="/granadagold.webp" // Foto interior tienda
                   alt="Granada Gold"
                   fill
                   className="object-cover group-hover:scale-105 transition duration-500"
@@ -243,7 +266,7 @@ export default function Home() {
             <div className="group relative bg-neutral-900 rounded-3xl overflow-hidden border border-neutral-800 hover:border-red-600/50 transition">
               <div className="relative h-64 bg-neutral-800">
                 <Image
-                  src="/tienda-masaya.jpg" // Foto tienda Masaya
+                  src="/fachadamasaya.webp" // Foto tienda Masaya
                   alt="Masaya Gold"
                   fill
                   className="object-cover group-hover:scale-105 transition duration-500"
