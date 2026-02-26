@@ -1,6 +1,6 @@
-// app/hub/page.jsx - Portal de acceso a apps internas
 
-// app/hub/page.jsx - Portal de acceso a apps internas
+"use client";
+
 export default function HubPage() {
   const apps = [
     {
