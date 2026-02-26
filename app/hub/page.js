@@ -27,7 +27,7 @@ export default function HubPage() {
       desc: 'Caja, reportes y administración',
       icon: '💰',
       color: 'from-green-600 to-green-800',
-      url: 'sistemacontablesanmartin.netlify.app',
+      url: 'https://sistemacontablesanmartin.netlify.app/',
       activo: true
     },
     {
