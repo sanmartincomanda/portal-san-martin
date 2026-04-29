@@ -1,556 +1,753 @@
-// app/page.jsx - Portal Distribuidores SR
-"use client";
-import Image from 'next/image';
-import Link from 'next/link';
+import Image from "next/image";
+import Link from "next/link";
+
+const navLinks = [
+  { label: "Inicio", href: "#inicio" },
+  { label: "Colecciones", href: "#colecciones" },
+  { label: "Sucursales", href: "#sucursales" },
+  { label: "Portal", href: "#portal" },
+];
+
+const promiseCards = [
+  {
+    number: "01",
+    title: "Vitrina con pulso",
+    copy:
+      "Fotos grandes, ritmo editorial y una marca que se siente premium antes del primer click.",
+  },
+  {
+    number: "02",
+    title: "Compra mas simple",
+    copy:
+      "La tienda, el WhatsApp y el retiro rapido conviven sin ruido ni pasos innecesarios.",
+  },
+  {
+    number: "03",
+    title: "Operacion local real",
+    copy:
+      "Granada y Masaya quedan al frente, con servicio diario y lenguaje mas cercano al cliente.",
+  },
+];
+
+const stores = [
+  {
+    name: "Granada Gold",
+    badge: "Flagship",
+    description: "La sucursal que pone la barra visual y la experiencia de servicio.",
+    image: "/granadagold.webp",
+    address: "De la Calzada, 1/2 cuadra al Este, Granada",
+    phone: "8980-5608",
+    hours: "Lunes a Domingo / 8:00 AM - 8:00 PM",
+    map: "https://maps.google.com/?q=Carnes+San+Martin+Granada",
+    whatsapp: "https://wa.me/50589805608",
+  },
+  {
+    name: "Masaya Gold",
+    badge: "Servicio diario",
+    description: "Atencion directa, vitrina cuidada y la misma calidad premium en Masaya.",
+    image: "/fachadamasaya.webp",
+    address: "Del Parque Central, 2 cuadras al Sur, Masaya",
+    phone: "8980-5608",
+    hours: "Lunes a Domingo / 8:00 AM - 8:00 PM",
+    map: "https://maps.google.com/?q=Carnes+San+Martin+Masaya",
+    whatsapp: "https://wa.me/50589805608",
+  },
+];
+
+const upcomingStores = [
+  { name: "Express Inmaculada", place: "Granada Inmaculada" },
+  { name: "Express Nindiri", place: "Nindiri, Masaya" },
+];
+
+const internalApps = [
+  {
+    name: "Pedidos delivery",
+    desc: "Rutas, reparto y seguimiento operativo.",
+  },
+  {
+    name: "Pedidos internos",
+    desc: "Traspasos y movimiento entre sucursales.",
+  },
+  {
+    name: "Finanzas",
+    desc: "Caja, reportes y lectura rapida del negocio.",
+  },
+  {
+    name: "Bodega",
+    desc: "Inventario y control de stock interno.",
+  },
+];
+
+export const metadata = {
+  title: "Carnes San Martin",
+  description:
+    "Distribuidores oficiales de Carnes San Martin en Granada y Masaya, con tienda virtual, sucursales Gold y portal interno.",
+};
+
+const currentYear = new Date().getFullYear();
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-[#004c5c] text-[#fef1e7]">
-      {/* Tipografías personalizadas */}
-      <style jsx global>{`
-        @font-face {
-          font-family: 'FatFrank';
-          src: url('/fonts/FatFrank-Heavy.woff2') format('woff2');
-          font-weight: 900;
-          font-style: normal;
-        }
-        @font-face {
-          font-family: 'Handelson';
-          src: url('/fonts/HandelsonThree.woff2') format('woff2');
-          font-weight: normal;
-          font-style: normal;
-        }
-        .font-fatfrank {
-          font-family: 'FatFrank', 'Arial Black', sans-serif;
-          font-weight: 900;
-        }
-        .font-handelson {
-          font-family: 'Handelson', 'Brush Script MT', cursive;
-        }
-      `}</style>
+    <main className="page-shell overflow-x-hidden text-[var(--foreground)]">
+      <div className="orb pointer-events-none absolute left-[-6rem] top-24 h-72 w-72 rounded-full bg-[var(--brand)]/18 blur-3xl" />
+      <div className="orb pointer-events-none absolute right-[-5rem] top-[38rem] h-80 w-80 rounded-full bg-[var(--ember)]/16 blur-3xl [animation-delay:-3s]" />
 
-      {/* Navbar */}
-      <nav className="fixed top-0 w-full bg-[#004c5c]/95 backdrop-blur-md border-b border-[#fac85a]/30 z-50">
-        <div className="max-w-7xl mx-auto px-6 h-24 flex items-center justify-between">
-          <div className="flex items-center gap-4">
-            {/* Logo con fondo crema para que se vea */}
-            <div className="relative w-16 h-16 bg-[#fef1e7] rounded-xl flex items-center justify-center p-2">
+      <nav className="fixed inset-x-0 top-0 z-50 px-4 pt-4 sm:px-6">
+        <div className="mx-auto flex max-w-7xl items-center justify-between rounded-full border border-[var(--line)] bg-[rgba(5,10,11,0.74)] px-4 py-3 shadow-[0_20px_60px_rgba(0,0,0,0.32)] backdrop-blur-xl sm:px-6">
+          <Link href="#inicio" className="flex items-center gap-3">
+            <div className="relative h-11 w-11 overflow-hidden rounded-2xl bg-[var(--paper)] p-2 shadow-[0_14px_30px_rgba(0,0,0,0.18)]">
               <Image
                 src="/logocsm.svg"
-                alt="Carnes San Martín"
+                alt="Carnes San Martin"
                 fill
                 className="object-contain p-1"
                 priority
               />
             </div>
-            <div className="hidden md:block">
-              <div className="text-xs text-[#fac85a] font-bold tracking-widest uppercase mb-0.5 font-fatfrank">
-                Distribuidores Oficiales
-              </div>
-              <div className="text-2xl font-fatfrank tracking-tight text-[#fef1e7]">
-                Distribuidores <span className="text-[#fac85a] font-handelson text-3xl">SR</span>
-              </div>
+            <div>
+              <p className="text-[0.68rem] uppercase tracking-[0.35em] text-[var(--paper-soft)]">
+                Distribuidores oficiales
+              </p>
+              <p className="font-display text-2xl leading-none text-[var(--paper)]">
+                SR
+              </p>
             </div>
-          </div>
-          
-          <div className="hidden md:flex items-center gap-8">
-            <Link href="#inicio" className="text-sm font-bold hover:text-[#fac85a] transition font-fatfrack">Inicio</Link>
-            <Link href="#sucursales" className="text-sm font-bold hover:text-[#fac85a] transition font-fatfrank">Sucursales</Link>
-            <Link href="https://tienda.distribuidoressr.com" className="px-5 py-2.5 bg-[#fac85a] hover:bg-[#e5b54a] text-[#004c5c] rounded-lg text-sm font-bold transition font-fatfrank">
-              Tienda Virtual →
-            </Link>
-            <Link 
-              href="https://sanmartinsr.netlify.app/hub" 
-              className="px-5 py-2.5 border-2 border-[#fac85a] hover:bg-[#fac85a]/20 text-[#fef1e7] rounded-lg text-sm font-bold transition flex items-center gap-2 font-fatfrank"
-            >
-              🔐 Portal Interno
-            </Link>
+          </Link>
+
+          <div className="hidden items-center gap-8 md:flex">
+            {navLinks.map((item) => (
+              <Link
+                key={item.href}
+                href={item.href}
+                className="text-sm uppercase tracking-[0.28em] text-[var(--paper-soft)] transition hover:text-[var(--paper)]"
+              >
+                {item.label}
+              </Link>
+            ))}
           </div>
 
-          <button className="md:hidden p-2 text-[#fef1e7]">
-            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" /></svg>
-          </button>
+          <div className="hidden items-center gap-3 md:flex">
+            <Link
+              href="/hub"
+              className="rounded-full border border-[var(--line-strong)] px-5 py-2 text-sm uppercase tracking-[0.24em] text-[var(--paper)] transition hover:border-[var(--brand)] hover:text-[var(--brand-strong)]"
+            >
+              Portal interno
+            </Link>
+            <a
+              href="https://tienda.distribuidoressr.com"
+              target="_blank"
+              rel="noreferrer"
+              className="rounded-full bg-[var(--brand)] px-5 py-2 text-sm font-semibold uppercase tracking-[0.24em] text-[var(--ink)] transition hover:bg-[var(--brand-strong)]"
+            >
+              Ir a la tienda
+            </a>
+          </div>
+
+          <details className="relative md:hidden">
+            <summary className="flex h-11 w-11 cursor-pointer items-center justify-center rounded-full border border-[var(--line-strong)] bg-white/5 text-[var(--paper)] transition hover:border-[var(--brand)] hover:text-[var(--brand-strong)]">
+              <span className="sr-only">Abrir menu</span>
+              <span className="flex flex-col gap-1">
+                <span className="block h-px w-5 bg-current" />
+                <span className="block h-px w-5 bg-current" />
+                <span className="block h-px w-5 bg-current" />
+              </span>
+            </summary>
+            <div className="panel absolute right-0 top-14 w-72 rounded-[1.75rem] p-5">
+              <div className="flex flex-col gap-3">
+                {navLinks.map((item) => (
+                  <Link
+                    key={item.href}
+                    href={item.href}
+                    className="rounded-2xl border border-white/5 px-4 py-3 text-sm uppercase tracking-[0.24em] text-[var(--paper-soft)] transition hover:border-[var(--line-strong)] hover:text-[var(--paper)]"
+                  >
+                    {item.label}
+                  </Link>
+                ))}
+                <Link
+                  href="/hub"
+                  className="rounded-2xl border border-[var(--line-strong)] px-4 py-3 text-sm uppercase tracking-[0.24em] text-[var(--paper)] transition hover:border-[var(--brand)] hover:text-[var(--brand-strong)]"
+                >
+                  Portal interno
+                </Link>
+                <a
+                  href="https://tienda.distribuidoressr.com"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="rounded-2xl bg-[var(--brand)] px-4 py-3 text-sm font-semibold uppercase tracking-[0.24em] text-[var(--ink)] transition hover:bg-[var(--brand-strong)]"
+                >
+                  Ir a la tienda
+                </a>
+              </div>
+            </div>
+          </details>
         </div>
       </nav>
 
-      {/* Hero Section */}
-      <section id="inicio" className="relative min-h-screen flex items-center pt-24">
-        <div className="absolute inset-0 z-0">
-          <Image
-            src="/tomahawkpoder.jpg"
-            alt="Tomahawk - Poder en tu parrilla"
-            fill
-            className="object-cover"
-            priority
-          />
-          <div className="absolute inset-0 bg-gradient-to-r from-[#004c5c] via-[#004c5c]/85 to-[#004c5c]/60" />
-          <div className="absolute inset-0 bg-gradient-to-t from-[#004c5c] via-transparent to-transparent" />
-        </div>
-
-        <div className="relative z-10 max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-12 items-center py-20">
-          <div>
-            <div className="inline-flex items-center gap-2 px-4 py-2 bg-[#fac85a]/20 border border-[#fac85a]/40 rounded-full text-[#fac85a] text-sm font-bold mb-6 font-fatfrank">
-              <span className="w-2 h-2 bg-[#fac85a] rounded-full animate-pulse" />
-              Distribuidores Autorizados
-            </div>
-            
-            <h1 className="text-5xl lg:text-7xl font-fatfrank leading-[0.95] mb-6 text-[#fef1e7]">
-              CARNES{' '}
-              <span className="text-[#fac85a] font-handelson text-6xl lg:text-8xl">San Martín</span>
-              <br />
-              <span className="text-3xl lg:text-4xl text-[#fef1e7]/90">EN GRANADA Y MASAYA</span>
+      <section id="inicio" className="relative px-6 pb-20 pt-32 sm:px-8 lg:px-10">
+        <div className="mx-auto grid max-w-7xl gap-16 lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
+          <div className="relative z-10">
+            <p className="section-kicker">Granada + Masaya / tienda virtual / entrega local</p>
+            <h1 className="gold-line mt-5 max-w-4xl font-display text-[clamp(4.2rem,12vw,9.4rem)] leading-[0.84] text-[var(--paper)]">
+              Cortes con
+              <span className="block text-[var(--brand-strong)]">caracter</span>
+              <span className="mt-3 block font-accent text-[clamp(2.4rem,5vw,4.8rem)] normal-case leading-[0.95] tracking-normal text-[var(--paper-soft)]">
+                de vitrina premium a pedido rapido
+              </span>
             </h1>
-            
-            <p className="text-xl text-[#fef1e7]/80 mb-8 max-w-lg leading-relaxed">
-              Somos <span className="text-[#fac85a] font-handelson text-2xl">Distribuidores SR</span>, distribuidores oficiales de Carnes San Martín. 
-              Llevamos la mejor carne premium a tu mesa.
+
+            <p className="mt-10 max-w-xl text-lg leading-8 text-[var(--paper-soft)] sm:text-xl">
+              Distribuidores SR conecta la calidad de Carnes San Martin con una
+              experiencia mas refinada: linea Gold, soluciones practicas y
+              compra directa desde la web o por WhatsApp.
             </p>
-            
-            <div className="flex flex-wrap gap-4 mb-12">
-              <Link href="https://tienda.distribuidoressr.com" className="px-8 py-4 bg-[#fac85a] hover:bg-[#e5b54a] text-[#004c5c] rounded-xl font-bold text-lg transition flex items-center gap-2 shadow-lg shadow-[#fac85a]/30 font-fatfrank">
-                🛒 Comprar Ahora
+
+            <div className="mt-10 flex flex-wrap gap-4">
+              <a
+                href="https://tienda.distribuidoressr.com"
+                target="_blank"
+                rel="noreferrer"
+                className="rounded-full bg-[var(--brand)] px-7 py-4 text-sm font-semibold uppercase tracking-[0.24em] text-[var(--ink)] transition hover:bg-[var(--brand-strong)]"
+              >
+                Entrar a la tienda
+              </a>
+              <Link
+                href="#sucursales"
+                className="rounded-full border border-[var(--line-strong)] px-7 py-4 text-sm uppercase tracking-[0.24em] text-[var(--paper)] transition hover:border-[var(--brand)] hover:text-[var(--brand-strong)]"
+              >
+                Ver sucursales
               </Link>
-              <Link href="#sucursales" className="px-8 py-4 bg-[#fef1e7]/10 hover:bg-[#fef1e7]/20 border border-[#fef1e7]/30 text-[#fef1e7] rounded-xl font-bold text-lg transition backdrop-blur font-fatfrank">
-                📍 Visítanos
-              </Link>
+              <a
+                href="https://wa.me/50589805608"
+                target="_blank"
+                rel="noreferrer"
+                className="rounded-full border border-white/8 px-7 py-4 text-sm uppercase tracking-[0.24em] text-[var(--paper-soft)] transition hover:border-[var(--line-strong)] hover:text-[var(--paper)]"
+              >
+                Hablar por WhatsApp
+              </a>
             </div>
 
-            <div className="grid grid-cols-3 gap-6 pt-8 border-t border-[#fef1e7]/10">
-              <div>
-                <div className="text-3xl font-fatfrank text-[#fac85a]">2+</div>
-                <div className="text-sm text-[#fef1e7]/60">Años como distribuidores</div>
+            <div className="mt-12 grid gap-4 sm:grid-cols-3">
+              <div className="panel-soft rounded-[1.5rem] p-5">
+                <p className="font-display text-4xl text-[var(--brand-strong)]">4</p>
+                <p className="mt-2 text-sm uppercase tracking-[0.24em] text-[var(--paper-soft)]">
+                  Puntos de venta
+                </p>
               </div>
-              <div>
-                <div className="text-3xl font-fatfrank text-[#fac85a]">4</div>
-                <div className="text-sm text-[#fef1e7]/60">Puntos de venta</div>
+              <div className="panel-soft rounded-[1.5rem] p-5">
+                <p className="font-display text-4xl text-[var(--brand-strong)]">
+                  Gold
+                </p>
+                <p className="mt-2 text-sm uppercase tracking-[0.24em] text-[var(--paper-soft)]">
+                  Linea premium + practica
+                </p>
               </div>
-              <div>
-                <div className="text-3xl font-fatfrank text-[#fac85a]">10K+</div>
-                <div className="text-sm text-[#fef1e7]/60">Clientes atendidos</div>
+              <div className="panel-soft rounded-[1.5rem] p-5">
+                <p className="font-display text-4xl text-[var(--brand-strong)]">
+                  Diario
+                </p>
+                <p className="mt-2 text-sm uppercase tracking-[0.24em] text-[var(--paper-soft)]">
+                  Atencion de 8AM a 8PM
+                </p>
               </div>
             </div>
           </div>
 
-          {/* Video Reel */}
-<div className="block w-full px-4 mb-12 lg:mb-0"> 
-  <div className="relative group">
-    {/* Efecto Glow */}
-    <div className="absolute -inset-1 bg-[#fac85a] rounded-[2rem] blur opacity-20 group-hover:opacity-40 transition duration-1000"></div>
-    
-    <div className="relative aspect-[9/16] max-w-[280px] md:max-w-sm mx-auto bg-[#004c5c] rounded-[2rem] overflow-hidden border-4 border-[#fef1e7]/20 shadow-2xl">
-      <video
-        autoPlay
-        loop
-        muted
-        playsInline  // <--- Esto es lo que salva la vida en iPhones
-        className="absolute inset-0 w-full h-full object-cover"
-      >
+          <div className="relative">
+            <article className="panel editorial-card relative overflow-hidden rounded-[2.4rem] p-3">
+              <div className="relative min-h-[26rem] overflow-hidden rounded-[2rem] md:min-h-[36rem]">
+                <Image
+                  src="/tomahawkpoder.jpg"
+                  alt="Tomahawk y cortes premium"
+                  fill
+                  priority
+                  sizes="(min-width: 1024px) 46vw, 100vw"
+                  className="object-cover object-center"
+                />
+                <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(4,8,9,0.18),rgba(4,8,9,0.26)_32%,rgba(4,8,9,0.92))]" />
+                <div className="absolute left-6 top-6 rounded-full border border-white/12 bg-black/20 px-4 py-2 text-[0.68rem] uppercase tracking-[0.35em] text-[var(--paper-soft)] backdrop-blur">
+                  Curado para parrilla
+                </div>
+                <div className="absolute bottom-6 left-6 right-6 flex flex-wrap items-end justify-between gap-4">
+                  <div className="max-w-sm">
+                    <p className="text-xs uppercase tracking-[0.35em] text-[var(--brand-strong)]">
+                      Edicion Gold
+                    </p>
+                    <h2 className="mt-3 font-display text-5xl leading-none text-[var(--paper)] sm:text-6xl">
+                      Tomahawk
+                    </h2>
+                    <p className="mt-4 text-sm leading-7 text-[var(--paper-soft)]">
+                      Marmoleo, grosor y una presencia capaz de abrir el
+                      apetito antes de pasar al carrito.
+                    </p>
+                  </div>
+
+                  <div className="rounded-[1.4rem] border border-white/10 bg-black/25 px-5 py-4 backdrop-blur">
+                    <p className="text-[0.68rem] uppercase tracking-[0.32em] text-[var(--paper-soft)]">
+                      Disponible
+                    </p>
+                    <p className="mt-2 font-display text-3xl text-[var(--brand-strong)]">
+                      Granada / Masaya
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </article>
+
+            <article className="panel editorial-card absolute -bottom-10 -left-4 hidden w-56 rounded-[1.8rem] p-3 lg:block">
+              <div className="relative aspect-[10/16] overflow-hidden rounded-[1.4rem]">
+                <video
+                  autoPlay
+                  loop
+                  muted
+                  playsInline
+                  className="h-full w-full object-cover"
+                >
                   <source src="/ReelGranada.mp4" type="video/mp4" />
                 </video>
-                <div className="absolute inset-0 bg-gradient-to-t from-[#004c5c]/90 via-transparent to-[#004c5c]/20" />
-                <div className="absolute top-6 left-6 z-10 flex items-center gap-2">
-                  <div className="w-8 h-8 bg-[#fac85a] rounded-full flex items-center justify-center border border-[#fef1e7]/20">
-                    <span className="text-[10px] font-black text-[#004c5c] font-fatfrank">SR</span>
-                  </div>
-                  <span className="text-xs font-bold text-[#fef1e7] drop-shadow-lg font-fatfrank">Distribuidores SR</span>
+                <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(4,8,9,0.08),rgba(4,8,9,0.78))]" />
+                <div className="absolute inset-x-0 bottom-0 p-4">
+                  <p className="text-[0.62rem] uppercase tracking-[0.32em] text-[var(--brand-strong)]">
+                    Granada Gold
+                  </p>
+                  <p className="mt-2 text-sm leading-6 text-[var(--paper)]">
+                    Una vitrina que se siente fisica incluso en pantalla.
+                  </p>
                 </div>
-                <div className="absolute bottom-0 left-0 right-0 p-8 z-10">
-                  <div className="flex items-center gap-2 mb-3">
-                    <span className="relative flex h-2 w-2">
-                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#fac85a] opacity-75"></span>
-                      <span className="relative inline-flex rounded-full h-2 w-2 bg-[#fac85a]"></span>
-                    </span>
-                    <span className="text-[10px] font-black text-[#fac85a] uppercase tracking-widest font-fatfrank">En Vivo - Granada</span>
-                  </div>
-                  <h3 className="text-xl font-fatfrank text-[#fef1e7] mb-1 leading-tight">
-                    CALIDAD <span className="text-[#fac85a] font-handelson text-2xl">San Martín</span>
-                  </h3>
-                  <p className="text-xs text-[#fef1e7]/70">Sucursal Granada Gold</p>
-                </div>
-                <div className="absolute bottom-0 left-0 h-1 bg-[#fac85a] w-2/3"></div>
               </div>
+            </article>
+
+            <article className="panel absolute -right-4 top-10 hidden w-60 rounded-[1.8rem] p-5 xl:block">
+              <p className="text-[0.68rem] uppercase tracking-[0.35em] text-[var(--paper-soft)]">
+                Pulso diario
+              </p>
+              <p className="mt-4 font-display text-4xl leading-none text-[var(--paper)]">
+                Abierto todos
+                <span className="block text-[var(--brand-strong)]">los dias</span>
+              </p>
+              <div className="section-divider mt-5" />
+              <p className="mt-5 text-sm leading-7 text-[var(--paper-soft)]">
+                Compra en linea, recoge en tienda o termina tu pedido por
+                WhatsApp sin perder el tono premium de la marca.
+              </p>
+            </article>
+
+            <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:hidden">
+              <article className="panel-soft rounded-[1.5rem] p-4">
+                <p className="text-[0.68rem] uppercase tracking-[0.32em] text-[var(--brand-strong)]">
+                  Granada Gold
+                </p>
+                <p className="mt-3 text-sm leading-6 text-[var(--paper-soft)]">
+                  Una vitrina con movimiento real, ahora integrada a una
+                  experiencia mas elegante.
+                </p>
+              </article>
+              <article className="panel-soft rounded-[1.5rem] p-4">
+                <p className="text-[0.68rem] uppercase tracking-[0.32em] text-[var(--brand-strong)]">
+                  Pulso diario
+                </p>
+                <p className="mt-3 text-sm leading-6 text-[var(--paper-soft)]">
+                  Abierto todos los dias de 8:00 AM a 8:00 PM con atencion en
+                  Granada y Masaya.
+                </p>
+              </article>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Banner Distribuidores - Con imagen de fondo */}
-      <section className="py-20 relative overflow-hidden">
-        <div className="absolute inset-0">
-          <Image
-            src="/lineagold.jpg"
-            alt="Línea Gold"
-            fill
-            className="object-cover opacity-30"
-          />
-          <div className="absolute inset-0 bg-[#004c5c]/80" />
-        </div>
-        <div className="max-w-7xl mx-auto px-6 relative z-10">
-          <div className="flex flex-col md:flex-row items-center justify-between gap-8">
-            <div className="flex items-center gap-6">
-              <div className="w-24 h-24 bg-[#fef1e7] rounded-2xl flex items-center justify-center p-3 shadow-xl">
-                <Image
-                  src="/logocsm.svg"
-                  alt="Carnes San Martín"
-                  width={70}
-                  height={70}
-                  className="object-contain"
-                />
-              </div>
-              <div>
-                <h2 className="text-4xl font-fatfrank text-[#fef1e7] mb-1">
-                  Distribuidores <span className="text-[#fac85a] font-handelson text-5xl">Oficiales</span>
-                </h2>
-                <p className="text-[#fef1e7]/80 text-lg">Productos 100% originales Carnes San Martín</p>
-              </div>
-            </div>
-            <div className="flex gap-4">
-              {['Garantía de calidad', 'Precios oficiales', 'Productos frescos'].map((item, i) => (
-                <div key={i} className="text-center px-6 py-4 bg-[#fef1e7]/10 backdrop-blur rounded-xl border border-[#fac85a]/20">
-                  <div className="text-2xl font-fatfrank text-[#fac85a]">✓</div>
-                  <div className="text-xs text-[#fef1e7]/80 font-bold uppercase">{item}</div>
-                </div>
-              ))}
-            </div>
-          </div>
+      <section className="-mt-6 px-6 pb-10 sm:px-8 lg:px-10">
+        <div className="mx-auto grid max-w-7xl gap-4 lg:grid-cols-3">
+          {promiseCards.map((card) => (
+            <article
+              key={card.number}
+              className="panel-soft editorial-card rounded-[1.75rem] p-6"
+            >
+              <p className="font-display text-5xl text-[var(--brand-strong)]">
+                {card.number}
+              </p>
+              <h2 className="mt-6 font-display text-3xl leading-none text-[var(--paper)]">
+                {card.title}
+              </h2>
+              <p className="mt-4 max-w-sm text-sm leading-7 text-[var(--paper-soft)]">
+                {card.copy}
+              </p>
+            </article>
+          ))}
         </div>
       </section>
 
-      {/* Sucursales */}
-      <section id="sucursales" className="py-24 bg-[#003d4a]">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="text-center mb-16">
-            <span className="text-[#fac85a] font-bold tracking-widest text-sm uppercase font-fatfrank">Encuéntranos</span>
-            <h2 className="text-4xl lg:text-6xl font-fatfrank mt-2 mb-4 text-[#fef1e7]">
-              NUESTRAS <span className="text-[#fac85a] font-handelson text-5xl lg:text-7xl">Sucursales</span>
-            </h2>
-            <p className="text-[#fef1e7]/60 max-w-2xl mx-auto text-lg">
-              Visítanos en Granada o Masaya. Servicio delivery disponible.
+      <section id="colecciones" className="px-6 py-24 sm:px-8 lg:px-10">
+        <div className="mx-auto max-w-7xl">
+          <div className="grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-end">
+            <div>
+              <p className="section-kicker">Colecciones con mejor ritmo visual</p>
+              <h2 className="mt-5 max-w-xl font-display text-[clamp(3.2rem,8vw,6rem)] leading-[0.88] text-[var(--paper)]">
+                La tienda entra
+                <span className="block text-[var(--brand-strong)]">por los ojos</span>
+                <span className="mt-3 block font-accent text-[clamp(2rem,4.2vw,3.7rem)] normal-case leading-[0.95] tracking-normal text-[var(--paper-soft)]">
+                  y despues convierte mas facil
+                </span>
+              </h2>
+            </div>
+            <p className="max-w-xl text-base leading-8 text-[var(--paper-soft)] sm:text-lg">
+              En lugar de una lista plana, la pagina ahora pone en escena cada
+              linea con su propio tempo: premium para antojar, practica para
+              resolver y cortes de parrilla para empujar compra impulsiva.
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 gap-8">
-            {/* Granada Gold */}
-            <div className="group relative bg-[#004c5c] rounded-3xl overflow-hidden border border-[#fef1e7]/10 hover:border-[#fac85a]/50 transition">
-              <div className="relative h-72">
+          <div className="mt-12 grid gap-6 lg:grid-cols-12 lg:grid-rows-[1fr_auto]">
+            <article className="panel editorial-card relative overflow-hidden rounded-[2.2rem] p-3 lg:col-span-7 lg:row-span-2">
+              <div className="relative h-full min-h-[28rem] overflow-hidden rounded-[1.8rem]">
                 <Image
-                  src="/granadagold.webp"
-                  alt="Granada Gold"
+                  src="/lineagold.jpg"
+                  alt="Linea Gold"
                   fill
-                  className="object-cover group-hover:scale-105 transition duration-500"
+                  sizes="(min-width: 1024px) 55vw, 100vw"
+                  className="object-cover"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#004c5c] to-transparent" />
-                <div className="absolute top-4 right-4 bg-[#fac85a] text-[#004c5c] px-4 py-2 rounded-full text-sm font-black uppercase font-fatfrank">
-                  Gold
-                </div>
-              </div>
-              <div className="p-8">
-                <h3 className="text-3xl font-fatfrank mb-2 text-[#fef1e7]">
-                  Granada <span className="text-[#fac85a] font-handelson text-4xl">Gold</span>
-                </h3>
-                <p className="text-[#fef1e7]/60 mb-6">Nuestra tienda flagship en Granada</p>
-                
-                <div className="space-y-3 mb-6">
-                  <div className="flex items-start gap-3 text-sm">
-                    <span className="text-[#fac85a] mt-0.5 text-lg">📍</span>
-                    <span className="text-[#fef1e7]/80">De la Calzada, 1/2 cuadra al Este, Granada</span>
-                  </div>
-                  <div className="flex items-center gap-3 text-sm">
-                    <span className="text-[#fac85a] text-lg">📞</span>
-                    <span className="text-[#fef1e7]/80 font-mono font-bold">8980-5608</span>
-                  </div>
-                  <div className="flex items-center gap-3 text-sm">
-                    <span className="text-[#fac85a] text-lg">🕐</span>
-                    <span className="text-[#fef1e7]/80">Lunes a Domingo: 8:00 AM - 8:00 PM</span>
-                  </div>
-                </div>
-
-                <div className="flex gap-3">
-                  <a href="https://maps.google.com/?q=Carnes+San+Martin+Granada" target="_blank" className="flex-1 py-3 bg-[#fac85a] hover:bg-[#e5b54a] text-[#004c5c] rounded-xl text-center font-bold transition font-fatfrank">
-                    Ver en Mapa
-                  </a>
-                  <a href="https://wa.me/50589805608" className="flex-1 py-3 bg-[#fef1e7]/10 hover:bg-[#fef1e7]/20 text-[#fef1e7] border border-[#fef1e7]/30 rounded-xl text-center font-bold transition font-fatfrank">
-                    WhatsApp
+                <div className="absolute inset-0 bg-[linear-gradient(135deg,rgba(4,8,9,0.14),rgba(4,8,9,0.28)_35%,rgba(4,8,9,0.94))]" />
+                <div className="absolute inset-x-0 bottom-0 p-6 sm:p-8">
+                  <p className="text-xs uppercase tracking-[0.35em] text-[var(--brand-strong)]">
+                    Gold line
+                  </p>
+                  <h3 className="mt-4 max-w-lg font-display text-5xl leading-none text-[var(--paper)] sm:text-6xl">
+                    La vitrina para mesas que quieren presencia
+                  </h3>
+                  <p className="mt-5 max-w-lg text-sm leading-7 text-[var(--paper-soft)]">
+                    Cortes premium, mejor lectura de marca y una composicion que
+                    le da escenario a la categoria mas aspiracional del negocio.
+                  </p>
+                  <a
+                    href="https://tienda.distribuidoressr.com"
+                    target="_blank"
+                    rel="noreferrer"
+                    className="mt-7 inline-flex rounded-full border border-white/12 bg-black/20 px-5 py-3 text-sm uppercase tracking-[0.24em] text-[var(--paper)] transition hover:border-[var(--brand)] hover:text-[var(--brand-strong)]"
+                  >
+                    Explorar Gold
                   </a>
                 </div>
               </div>
-            </div>
+            </article>
 
-            {/* Masaya Gold */}
-            <div className="group relative bg-[#004c5c] rounded-3xl overflow-hidden border border-[#fef1e7]/10 hover:border-[#fac85a]/50 transition">
-              <div className="relative h-72">
+            <article className="panel editorial-card relative overflow-hidden rounded-[2rem] p-3 lg:col-span-5">
+              <div className="relative min-h-[20rem] overflow-hidden rounded-[1.6rem]">
                 <Image
-                  src="/fachadamasaya.webp"
-                  alt="Masaya Gold"
+                  src="/lineapractica.jpg"
+                  alt="Linea practica"
                   fill
-                  className="object-cover group-hover:scale-105 transition duration-500"
+                  sizes="(min-width: 1024px) 36vw, 100vw"
+                  className="object-cover"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#004c5c] to-transparent" />
-                <div className="absolute top-4 right-4 bg-[#fac85a] text-[#004c5c] px-4 py-2 rounded-full text-sm font-black uppercase font-fatfrank">
-                  Gold
+                <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(4,8,9,0.08),rgba(4,8,9,0.84))]" />
+                <div className="absolute inset-x-0 bottom-0 p-6">
+                  <p className="text-xs uppercase tracking-[0.35em] text-[var(--brand-strong)]">
+                    Practica line
+                  </p>
+                  <h3 className="mt-3 font-display text-4xl leading-none text-[var(--paper)]">
+                    Resuelve rapido sin bajar la calidad
+                  </h3>
+                  <p className="mt-4 max-w-md text-sm leading-7 text-[var(--paper-soft)]">
+                    Empaque listo, lectura simple y una narrativa pensada para
+                    quien compra con hambre, prisa o necesidad puntual.
+                  </p>
                 </div>
               </div>
-              <div className="p-8">
-                <h3 className="text-3xl font-fatfrank mb-2 text-[#fef1e7]">
-                  Masaya <span className="text-[#fac85a] font-handelson text-4xl">Gold</span>
-                </h3>
-                <p className="text-[#fef1e7]/60 mb-6">El mejor servicio en la ciudad de las flores</p>
-                
-                <div className="space-y-3 mb-6">
-                  <div className="flex items-start gap-3 text-sm">
-                    <span className="text-[#fac85a] mt-0.5 text-lg">📍</span>
-                    <span className="text-[#fef1e7]/80">Del Parque Central, 2 cuadras al Sur, Masaya</span>
-                  </div>
-                  <div className="flex items-center gap-3 text-sm">
-                    <span className="text-[#fac85a] text-lg">📞</span>
-                    <span className="text-[#fef1e7]/80 font-mono font-bold">8980-5608</span>
-                  </div>
-                  <div className="flex items-center gap-3 text-sm">
-                    <span className="text-[#fac85a] text-lg">🕐</span>
-                    <span className="text-[#fef1e7]/80">Lunes a Domingo: 8:00 AM - 8:00 PM</span>
-                  </div>
-                </div>
+            </article>
 
-                <div className="flex gap-3">
-                  <a href="https://maps.google.com/?q=Carnes+San+Martin+Masaya" target="_blank" className="flex-1 py-3 bg-[#fac85a] hover:bg-[#e5b54a] text-[#004c5c] rounded-xl text-center font-bold transition font-fatfrank">
-                    Ver en Mapa
-                  </a>
-                  <a href="https://wa.me/50589805608" className="flex-1 py-3 bg-[#fef1e7]/10 hover:bg-[#fef1e7]/20 text-[#fef1e7] border border-[#fef1e7]/30 rounded-xl text-center font-bold transition font-fatfrank">
-                    WhatsApp
-                  </a>
+            <article className="panel editorial-card relative overflow-hidden rounded-[2rem] p-3 lg:col-span-3">
+              <div className="relative min-h-[18rem] overflow-hidden rounded-[1.6rem]">
+                <Image
+                  src="/puyaso.jpg"
+                  alt="Puyaso"
+                  fill
+                  sizes="(min-width: 1024px) 24vw, 100vw"
+                  className="object-cover"
+                />
+                <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(4,8,9,0.04),rgba(4,8,9,0.92))]" />
+                <div className="absolute inset-x-0 bottom-0 p-5">
+                  <p className="text-xs uppercase tracking-[0.35em] text-[var(--brand-strong)]">
+                    Parrilla
+                  </p>
+                  <h3 className="mt-3 font-display text-3xl leading-none text-[var(--paper)]">
+                    Puyaso con mas apetito visual
+                  </h3>
                 </div>
               </div>
-            </div>
+            </article>
 
-            {/* Próximamente */}
-            {[
-              { nombre: 'Express Inmaculada', lugar: 'Granada Inmaculada' },
-              { nombre: 'Express Nindirí', lugar: 'Nindirí, Masaya' }
-            ].map((item, i) => (
-              <div key={i} className="relative bg-[#004c5c]/50 rounded-3xl overflow-hidden border-2 border-dashed border-[#fef1e7]/20 p-8 flex flex-col items-center justify-center text-center min-h-[400px]">
-                <div className="w-20 h-20 bg-[#fef1e7]/10 rounded-2xl flex items-center justify-center text-4xl mb-4">
-                  🚧
-                </div>
-                <h3 className="text-xl font-fatfrank text-[#fef1e7]/70 mb-2">{item.nombre}</h3>
-                <p className="text-[#fef1e7]/40 mb-4">{item.lugar}</p>
-                <span className="px-4 py-2 bg-[#fef1e7]/10 text-[#fef1e7]/50 rounded-full text-sm font-bold font-fatfrank">
-                  PRÓXIMAMENTE
+            <article className="panel-soft editorial-card rounded-[2rem] p-6 lg:col-span-2">
+              <p className="text-xs uppercase tracking-[0.35em] text-[var(--brand-strong)]">
+                Ritmo comercial
+              </p>
+              <h3 className="mt-4 font-display text-4xl leading-none text-[var(--paper)]">
+                Menos relleno,
+                <span className="block text-[var(--brand-strong)]">mas venta</span>
+              </h3>
+              <ul className="mt-5 space-y-3 text-sm leading-7 text-[var(--paper-soft)]">
+                <li>Tienda virtual visible desde el primer scroll.</li>
+                <li>Sucursales mas legibles y mejor jerarquia.</li>
+                <li>Portal interno presente, pero sin competir.</li>
+              </ul>
+              <a
+                href="https://tienda.distribuidoressr.com"
+                target="_blank"
+                rel="noreferrer"
+                className="mt-6 inline-flex rounded-full bg-[var(--brand)] px-5 py-3 text-sm font-semibold uppercase tracking-[0.24em] text-[var(--ink)] transition hover:bg-[var(--brand-strong)]"
+              >
+                Comprar ahora
+              </a>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="sucursales" className="px-6 py-24 sm:px-8 lg:px-10">
+        <div className="mx-auto max-w-7xl">
+          <div className="grid gap-10 lg:grid-cols-[0.82fr_1.18fr] lg:items-end">
+            <div>
+              <p className="section-kicker">Donde se concreta el pedido</p>
+              <h2 className="mt-5 max-w-xl font-display text-[clamp(3.1rem,7vw,5.8rem)] leading-[0.88] text-[var(--paper)]">
+                Sucursales con
+                <span className="block text-[var(--brand-strong)]">presencia real</span>
+                <span className="mt-3 block font-accent text-[clamp(2rem,4vw,3.5rem)] normal-case leading-[0.95] tracking-normal text-[var(--paper-soft)]">
+                  mas claras, mas utiles y mejor contadas
                 </span>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Productos Destacados - Con imagen de fondo */}
-      <section className="py-24 relative overflow-hidden">
-        <div className="absolute inset-0">
-          <Image
-            src="/puyaso.jpg"
-            alt="Puyaso"
-            fill
-            className="object-cover opacity-20"
-          />
-          <div className="absolute inset-0 bg-[#004c5c]/90" />
-        </div>
-        
-        <div className="max-w-7xl mx-auto px-6 relative z-10">
-          <div className="text-center mb-16">
-            <span className="text-[#fac85a] font-bold tracking-widest text-sm uppercase font-fatfrank">Catálogo</span>
-            <h2 className="text-4xl lg:text-6xl font-fatfrank mt-2 mb-4 text-[#fef1e7]">
-              PRODUCTOS <span className="text-[#fac85a] font-handelson text-5xl lg:text-7xl">Destacados</span>
-            </h2>
-          </div>
-
-          <div className="grid md:grid-cols-3 gap-6">
-            {[
-              { nombre: 'Lomo de Res', precio: 'C$ 280', unidad: '/lb', tag: 'Premium' },
-              { nombre: 'Pechuga de Pollo', precio: 'C$ 95', unidad: '/lb', tag: 'Fresco' },
-              { nombre: 'Molida Especial', precio: 'C$ 145', unidad: '/lb', tag: 'Más vendido' },
-            ].map((prod, idx) => (
-              <div key={idx} className="bg-[#004c5c] rounded-2xl overflow-hidden border border-[#fef1e7]/10 hover:border-[#fac85a]/50 transition group shadow-xl">
-                <div className="relative h-48 bg-[#003d4a]">
-                  <div className="absolute top-4 left-4 bg-[#fac85a] text-[#004c5c] px-3 py-1 rounded-full text-xs font-bold font-fatfrank">
-                    {prod.tag}
-                  </div>
-                  <div className="absolute inset-0 flex items-center justify-center text-6xl group-hover:scale-110 transition">
-                    🥩
-                  </div>
-                </div>
-                <div className="p-6">
-                  <h3 className="text-xl font-fatfrank mb-2 text-[#fef1e7]">{prod.nombre}</h3>
-                  <div className="flex items-end justify-between mb-4">
-                    <div>
-                      <span className="text-3xl font-fatfrank text-[#fac85a]">{prod.precio}</span>
-                      <span className="text-[#fef1e7]/60 text-sm">{prod.unidad}</span>
-                    </div>
-                  </div>
-                  <Link href="https://tienda.distribuidoressr.com" className="block w-full py-3 bg-[#fac85a] hover:bg-[#e5b54a] text-[#004c5c] rounded-xl text-center font-bold transition font-fatfrank">
-                    Agregar al carrito
-                  </Link>
-                </div>
-              </div>
-            ))}
-          </div>
-
-          <div className="text-center mt-12">
-            <Link href="https://tienda.distribuidoressr.com" className="inline-flex items-center gap-2 px-8 py-4 bg-[#fef1e7] text-[#004c5c] hover:bg-[#fef1e7]/90 rounded-xl font-bold text-lg transition font-fatfrank">
-              Ver catálogo completo →
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      {/* Línea Práctica - Nueva sección con imagen */}
-      <section className="py-20 bg-[#003d4a]">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="grid md:grid-cols-2 gap-12 items-center">
-            <div className="relative h-96 rounded-3xl overflow-hidden">
-              <Image
-                src="/lineapractica.jpg"
-                alt="Línea Práctica San Martín"
-                fill
-                className="object-cover"
-              />
-              <div className="absolute inset-0 bg-gradient-to-r from-[#004c5c]/60 to-transparent" />
-            </div>
-            <div>
-              <span className="text-[#fac85a] font-bold tracking-widest text-sm uppercase font-fatfrank">Nuevo</span>
-              <h2 className="text-4xl lg:text-5xl font-fatfrank mt-2 mb-6 text-[#fef1e7]">
-                Línea <span className="text-[#fac85a] font-handelson text-6xl">Práctica</span>
               </h2>
-              <p className="text-[#fef1e7]/80 text-lg mb-6 leading-relaxed">
-                Productos pre-cortados y empacados al vacío, listos para llevar. 
-                La misma calidad San Martín con la conveniencia que necesitas.
-              </p>
-              <ul className="space-y-3 mb-8">
-                {['Pre-cortado y listo', 'Empaque al vacío', 'Conservación prolongada', 'Misma calidad premium'].map((item, i) => (
-                  <li key={i} className="flex items-center gap-3 text-[#fef1e7]/80">
-                    <span className="text-[#fac85a]">✓</span>
-                    <span>{item}</span>
-                  </li>
-                ))}
-              </ul>
-              <Link href="https://tienda.distribuidoressr.com" className="inline-flex items-center gap-2 px-8 py-4 bg-[#fac85a] hover:bg-[#e5b54a] text-[#004c5c] rounded-xl font-bold transition font-fatfrank">
-                Explorar línea práctica →
-              </Link>
             </div>
+            <p className="max-w-2xl text-base leading-8 text-[var(--paper-soft)] sm:text-lg">
+              Las tiendas Gold ahora se leen como destinos, no como simples
+              tarjetas repetidas. La informacion operativa esta mas ordenada y
+              las acciones de mapa o WhatsApp quedan donde el usuario las espera.
+            </p>
           </div>
-        </div>
-      </section>
 
-      {/* Portal Interno CTA */}
-      <section className="py-24 bg-gradient-to-br from-[#003d4a] via-[#004c5c] to-[#004c5c] relative overflow-hidden">
-        <div className="absolute inset-0 opacity-20">
-          <div className="absolute top-0 left-0 w-96 h-96 bg-[#fac85a] rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2" />
-          <div className="absolute bottom-0 right-0 w-96 h-96 bg-[#fac85a]/50 rounded-full blur-3xl translate-x-1/2 translate-y-1/2" />
-        </div>
-        
-        <div className="max-w-4xl mx-auto px-6 text-center relative z-10">
-          <div className="w-20 h-20 bg-[#fac85a] rounded-2xl mx-auto mb-8 flex items-center justify-center text-4xl shadow-2xl shadow-[#fac85a]/30">
-            🔐
-          </div>
-          <h2 className="text-4xl lg:text-6xl font-fatfrank mb-6 text-[#fef1e7]">
-            ¿ERES <span className="text-[#fac85a] font-handelson text-5xl lg:text-7xl">Colaborador?</span>
-          </h2>
-          <p className="text-xl text-[#fef1e7]/70 mb-12 max-w-2xl mx-auto">
-            Accede al portal interno para gestionar pedidos, finanzas, inventario y traspasos.
-          </p>
-          
-          <div className="grid sm:grid-cols-3 gap-4 max-w-3xl mx-auto mb-10">
-            {[
-              { icon: '📦', nombre: 'Delivery', desc: 'Gestión de pedidos', color: 'bg-blue-500' },
-              { icon: '💰', nombre: 'Finanzas', desc: 'Reportes y caja', color: 'bg-green-500' },
-              { icon: '📋', nombre: 'Bodega', desc: 'Inventario interno', color: 'bg-orange-500' }
-            ].map((app, idx) => (
-              <div key={idx} className="bg-[#004c5c]/80 backdrop-blur p-6 rounded-2xl border border-[#fef1e7]/10">
-                <div className={`w-12 h-12 ${app.color} rounded-xl flex items-center justify-center text-2xl mb-3 mx-auto`}>
-                  {app.icon}
+          <div className="mt-12 grid gap-6 lg:grid-cols-2">
+            {stores.map((store) => (
+              <article
+                key={store.name}
+                className="group panel editorial-card overflow-hidden rounded-[2.2rem] p-3"
+              >
+                <div className="relative min-h-[19rem] overflow-hidden rounded-[1.8rem]">
+                  <Image
+                    src={store.image}
+                    alt={store.name}
+                    fill
+                    sizes="(min-width: 1024px) 36vw, 100vw"
+                    className="object-cover transition duration-700 group-hover:scale-105"
+                  />
+                  <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(4,8,9,0.06),rgba(4,8,9,0.78))]" />
+                  <div className="absolute left-5 top-5 rounded-full border border-white/12 bg-black/20 px-4 py-2 text-[0.68rem] uppercase tracking-[0.35em] text-[var(--paper-soft)] backdrop-blur">
+                    {store.badge}
+                  </div>
                 </div>
-                <div className="font-bold text-lg text-[#fef1e7] font-fatfrank">{app.nombre}</div>
-                <div className="text-sm text-[#fef1e7]/60">{app.desc}</div>
-              </div>
+
+                <div className="grid gap-8 px-2 pb-2 pt-7 sm:grid-cols-[1fr_auto] sm:items-end">
+                  <div>
+                    <h3 className="font-display text-4xl leading-none text-[var(--paper)] sm:text-5xl">
+                      {store.name}
+                    </h3>
+                    <p className="mt-4 max-w-xl text-sm leading-7 text-[var(--paper-soft)]">
+                      {store.description}
+                    </p>
+
+                    <dl className="mt-8 space-y-4">
+                      <div className="flex flex-col gap-2 border-t border-white/8 pt-4 sm:flex-row sm:justify-between">
+                        <dt className="text-[0.68rem] uppercase tracking-[0.35em] text-[var(--brand-strong)]">
+                          Direccion
+                        </dt>
+                        <dd className="max-w-sm text-sm leading-7 text-[var(--paper-soft)] sm:text-right">
+                          {store.address}
+                        </dd>
+                      </div>
+                      <div className="flex flex-col gap-2 border-t border-white/8 pt-4 sm:flex-row sm:justify-between">
+                        <dt className="text-[0.68rem] uppercase tracking-[0.35em] text-[var(--brand-strong)]">
+                          Contacto
+                        </dt>
+                        <dd className="text-sm leading-7 text-[var(--paper-soft)] sm:text-right">
+                          {store.phone}
+                        </dd>
+                      </div>
+                      <div className="flex flex-col gap-2 border-t border-white/8 pt-4 sm:flex-row sm:justify-between">
+                        <dt className="text-[0.68rem] uppercase tracking-[0.35em] text-[var(--brand-strong)]">
+                          Horario
+                        </dt>
+                        <dd className="text-sm leading-7 text-[var(--paper-soft)] sm:text-right">
+                          {store.hours}
+                        </dd>
+                      </div>
+                    </dl>
+                  </div>
+
+                  <div className="flex flex-wrap gap-3 sm:flex-col sm:items-stretch">
+                    <a
+                      href={store.map}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="rounded-full bg-[var(--brand)] px-5 py-3 text-center text-sm font-semibold uppercase tracking-[0.24em] text-[var(--ink)] transition hover:bg-[var(--brand-strong)]"
+                    >
+                      Ver mapa
+                    </a>
+                    <a
+                      href={store.whatsapp}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="rounded-full border border-[var(--line-strong)] px-5 py-3 text-center text-sm uppercase tracking-[0.24em] text-[var(--paper)] transition hover:border-[var(--brand)] hover:text-[var(--brand-strong)]"
+                    >
+                      WhatsApp
+                    </a>
+                  </div>
+                </div>
+              </article>
             ))}
           </div>
 
-          <Link 
-            href="https://sanmartinsr.netlify.app/hub" 
-            className="inline-flex items-center gap-3 px-10 py-5 bg-[#fac85a] hover:bg-[#e5b54a] text-[#004c5c] rounded-2xl font-bold text-xl transition shadow-2xl shadow-[#fac85a]/30 font-fatfrank"
-          >
-            <span>Acceder al Portal Interno</span>
-            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
-          </Link>
+          <div className="mt-6 grid gap-4 md:grid-cols-3">
+            {upcomingStores.map((store) => (
+              <article
+                key={store.name}
+                className="panel-soft editorial-card rounded-[1.8rem] border border-dashed border-[var(--line-strong)] p-6"
+              >
+                <p className="text-xs uppercase tracking-[0.35em] text-[var(--brand-strong)]">
+                  Proximamente
+                </p>
+                <h3 className="mt-4 font-display text-3xl leading-none text-[var(--paper)]">
+                  {store.name}
+                </h3>
+                <p className="mt-4 text-sm leading-7 text-[var(--paper-soft)]">
+                  {store.place}
+                </p>
+              </article>
+            ))}
+
+            <article className="panel-soft editorial-card rounded-[1.8rem] p-6">
+              <p className="text-xs uppercase tracking-[0.35em] text-[var(--brand-strong)]">
+                Formas de compra
+              </p>
+              <h3 className="mt-4 font-display text-3xl leading-none text-[var(--paper)]">
+                Web, retiro y contacto directo
+              </h3>
+              <ul className="mt-5 space-y-3 text-sm leading-7 text-[var(--paper-soft)]">
+                <li>Tienda virtual para compra inmediata.</li>
+                <li>WhatsApp para cerrar pedidos sin friccion.</li>
+                <li>Retiro y atencion en sucursales Gold.</li>
+              </ul>
+            </article>
+          </div>
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="bg-[#003d4a] py-16 border-t border-[#fef1e7]/10">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="grid md:grid-cols-4 gap-12 mb-12">
-            <div className="md:col-span-2">
-              <div className="flex items-center gap-3 mb-4">
-                <div className="relative w-12 h-12 bg-[#fef1e7] rounded-lg flex items-center justify-center p-1">
-                  <Image
-                    src="/logocsm.svg"
-                    alt="Carnes San Martín"
-                    fill
-                    className="object-contain p-1"
-                  />
-                </div>
-                <div>
-                  <div className="text-xs text-[#fac85a] font-bold tracking-widest font-fatfrank">DISTRIBUIDORES OFICIALES</div>
-                  <div className="text-xl font-fatfrank text-[#fef1e7]">Distribuidores <span className="text-[#fac85a] font-handelson">SR</span></div>
-                </div>
+      <section id="portal" className="px-6 pb-24 pt-10 sm:px-8 lg:px-10">
+        <div className="mx-auto max-w-7xl">
+          <div className="panel overflow-hidden rounded-[2.5rem] p-6 sm:p-8 lg:p-10">
+            <div className="grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
+              <div>
+                <p className="section-kicker">Capa interna, ahora mas ordenada</p>
+                <h2 className="mt-5 max-w-lg font-display text-[clamp(3rem,6vw,5.4rem)] leading-[0.88] text-[var(--paper)]">
+                  Portal interno
+                  <span className="block text-[var(--brand-strong)]">sin ruido</span>
+                  <span className="mt-3 block font-accent text-[clamp(2rem,3.8vw,3.4rem)] normal-case leading-[0.95] tracking-normal text-[var(--paper-soft)]">
+                    visible cuando hace falta, secundario cuando no
+                  </span>
+                </h2>
+                <p className="mt-8 max-w-xl text-base leading-8 text-[var(--paper-soft)] sm:text-lg">
+                  La pagina publica ahora vende mejor y el acceso a operacion
+                  interna sigue presente, pero sin robar protagonismo al flujo
+                  comercial principal.
+                </p>
+                <Link
+                  href="/hub"
+                  className="mt-8 inline-flex rounded-full bg-[var(--brand)] px-7 py-4 text-sm font-semibold uppercase tracking-[0.24em] text-[var(--ink)] transition hover:bg-[var(--brand-strong)]"
+                >
+                  Abrir portal interno
+                </Link>
               </div>
-              <p className="text-[#fef1e7]/60 max-w-sm mb-6">
-                Distribuidores autorizados de Carnes San Martín en Granada y Masaya. 
-                Comprometidos con la calidad y el mejor servicio.
-              </p>
-              <div className="flex gap-3">
-                {[
-                  { icon: '📘', href: 'https://facebook.com/distribuidoressr', color: 'hover:bg-blue-600' },
-                  { icon: '📸', href: 'https://instagram.com/distribuidoressr', color: 'hover:bg-pink-600' },
-                  { icon: '💬', href: 'https://wa.me/50589805608', color: 'hover:bg-green-600' }
-                ].map((social, i) => (
-                  <a key={i} href={social.href} target="_blank" className={`w-10 h-10 bg-[#004c5c] ${social.color} rounded-full flex items-center justify-center transition text-[#fef1e7]`}>
-                    {social.icon}
-                  </a>
+
+              <div className="grid gap-4 sm:grid-cols-2">
+                {internalApps.map((app, index) => (
+                  <article
+                    key={app.name}
+                    className="panel-soft editorial-card rounded-[1.8rem] p-6"
+                  >
+                    <p className="font-display text-4xl text-[var(--brand-strong)]">
+                      0{index + 1}
+                    </p>
+                    <h3 className="mt-5 font-display text-3xl leading-none text-[var(--paper)]">
+                      {app.name}
+                    </h3>
+                    <p className="mt-4 text-sm leading-7 text-[var(--paper-soft)]">
+                      {app.desc}
+                    </p>
+                  </article>
                 ))}
               </div>
             </div>
-            
-            <div>
-              <h4 className="font-bold text-lg mb-4 text-[#fef1e7] font-fatfrank">Enlaces</h4>
-              <ul className="space-y-2 text-[#fef1e7]/60">
-                <li><Link href="#inicio" className="hover:text-[#fac85a] transition">Inicio</Link></li>
-                <li><Link href="#sucursales" className="hover:text-[#fac85a] transition">Sucursales</Link></li>
-                <li><Link href="https://tienda.distribuidoressr.com" className="hover:text-[#fac85a] transition">Tienda Virtual</Link></li>
-                <li><Link href="https://sanmartinsr.netlify.app/hub" className="hover:text-[#fac85a] transition">Portal Interno</Link></li>
-              </ul>
-            </div>
-            
-            <div>
-              <h4 className="font-bold text-lg mb-4 text-[#fef1e7] font-fatfrank">Contacto</h4>
-              <ul className="space-y-2 text-[#fef1e7]/60">
-                <li>📞 8980-5608</li>
-                <li>✉️ info@distribuidoressr.com</li>
-                <li>📍 Granada, Nicaragua</li>
-                <li>📍 Masaya, Nicaragua</li>
-              </ul>
-            </div>
           </div>
-          
-          <div className="pt-8 border-t border-[#fef1e7]/10 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-[#fef1e7]/40">
-            <div>© 2024 Distribuidores SR. Todos los derechos reservados.</div>
-            <div className="flex items-center gap-2">
-              <span>Una marca</span>
-              <div className="w-20 h-8 bg-[#fef1e7] rounded flex items-center justify-center p-1">
-                <Image src="/logocsm.svg" alt="Carnes San Martín" width={60} height={20} className="object-contain" />
+        </div>
+      </section>
+
+      <footer className="border-t border-[var(--line)] bg-black/10 px-6 py-12 sm:px-8 lg:px-10">
+        <div className="mx-auto flex max-w-7xl flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
+          <div className="max-w-lg">
+            <div className="flex items-center gap-4">
+              <div className="relative h-12 w-12 overflow-hidden rounded-2xl bg-[var(--paper)] p-2">
+                <Image
+                  src="/logocsm.svg"
+                  alt="Carnes San Martin"
+                  fill
+                  className="object-contain p-1"
+                />
+              </div>
+              <div>
+                <p className="text-[0.68rem] uppercase tracking-[0.35em] text-[var(--paper-soft)]">
+                  Distribuidores oficiales
+                </p>
+                <p className="font-display text-3xl leading-none text-[var(--paper)]">
+                  Distribuidores SR
+                </p>
               </div>
             </div>
+            <p className="mt-5 text-sm leading-7 text-[var(--paper-soft)]">
+              Carnes San Martin en Granada y Masaya con una presencia digital
+              mas fuerte, mas clara y mas lista para vender.
+            </p>
+          </div>
+
+          <div className="flex flex-col gap-2 text-sm uppercase tracking-[0.22em] text-[var(--paper-soft)] sm:flex-row sm:items-center sm:gap-6">
+            <Link href="#inicio" className="transition hover:text-[var(--paper)]">
+              Inicio
+            </Link>
+            <Link
+              href="#colecciones"
+              className="transition hover:text-[var(--paper)]"
+            >
+              Colecciones
+            </Link>
+            <Link
+              href="#sucursales"
+              className="transition hover:text-[var(--paper)]"
+            >
+              Sucursales
+            </Link>
+            <a
+              href="https://tienda.distribuidoressr.com"
+              target="_blank"
+              rel="noreferrer"
+              className="transition hover:text-[var(--paper)]"
+            >
+              Tienda virtual
+            </a>
+          </div>
+
+          <div className="text-sm leading-7 text-[var(--paper-soft)]">
+            <p>Contacto directo: 8980-5608</p>
+            <p>Granada y Masaya, Nicaragua</p>
+            <p className="mt-2 text-xs uppercase tracking-[0.24em]">
+              Copyright {currentYear} Distribuidores SR
+            </p>
           </div>
         </div>
       </footer>
-    </div>
+    </main>
   );
 }
