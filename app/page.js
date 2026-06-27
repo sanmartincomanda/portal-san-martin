@@ -134,7 +134,7 @@ export default function Home() {
               Portal interno
             </Link>
             <a
-              href="https://tienda.distribuidoressr.com"
+              href="https://tienda.sanmartinsr.com"
               target="_blank"
               rel="noreferrer"
               className="rounded-full bg-[var(--brand)] px-5 py-2 text-sm font-semibold uppercase tracking-[0.24em] text-[var(--ink)] transition hover:bg-[var(--brand-strong)]"
@@ -170,7 +170,7 @@ export default function Home() {
                   Portal interno
                 </Link>
                 <a
-                  href="https://tienda.distribuidoressr.com"
+                  href="https://tienda.sanmartinsr.com"
                   target="_blank"
                   rel="noreferrer"
                   className="rounded-2xl bg-[var(--brand)] px-4 py-3 text-sm font-semibold uppercase tracking-[0.24em] text-[var(--ink)] transition hover:bg-[var(--brand-strong)]"
@@ -203,7 +203,7 @@ export default function Home() {
 
             <div className="mt-10 flex flex-wrap gap-4">
               <a
-                href="https://tienda.distribuidoressr.com"
+                href="https://tienda.sanmartinsr.com"
                 target="_blank"
                 rel="noreferrer"
                 className="rounded-full bg-[var(--brand)] px-7 py-4 text-sm font-semibold uppercase tracking-[0.24em] text-[var(--ink)] transition hover:bg-[var(--brand-strong)]"
@@ -419,7 +419,7 @@ export default function Home() {
                     le da escenario a la categoria mas aspiracional del negocio.
                   </p>
                   <a
-                    href="https://tienda.distribuidoressr.com"
+                    href="https://tienda.sanmartinsr.com"
                     target="_blank"
                     rel="noreferrer"
                     className="mt-7 inline-flex rounded-full border border-white/12 bg-black/20 px-5 py-3 text-sm uppercase tracking-[0.24em] text-[var(--paper)] transition hover:border-[var(--brand)] hover:text-[var(--brand-strong)]"
@@ -490,7 +490,7 @@ export default function Home() {
                 <li>Portal interno presente, pero sin competir.</li>
               </ul>
               <a
-                href="https://tienda.distribuidoressr.com"
+                href="https://tienda.sanmartinsr.com"
                 target="_blank"
                 rel="noreferrer"
                 className="mt-6 inline-flex rounded-full bg-[var(--brand)] px-5 py-3 text-sm font-semibold uppercase tracking-[0.24em] text-[var(--ink)] transition hover:bg-[var(--brand-strong)]"
@@ -730,7 +730,7 @@ export default function Home() {
               Sucursales
             </Link>
             <a
-              href="https://tienda.distribuidoressr.com"
+              href="https://tienda.sanmartinsr.com"
               target="_blank"
               rel="noreferrer"
               className="transition hover:text-[var(--paper)]"
