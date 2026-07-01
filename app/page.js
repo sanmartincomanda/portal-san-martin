@@ -56,12 +56,12 @@ const stores = [
     badge: "Sucursal principal",
     description:
       "Distribuidora Granada con atencion directa, recogida en tienda y una comunicacion mas clara para clientes que buscan carne fresca y servicio confiable.",
-    image: "/granadagold.webp",
-    address: "Oficinas Claro media cuadra al lago, Granada, Nicaragua",
-    phone: "2552-7237",
-    secondary: "WhatsApp 8465-7949",
+    image: "/granada-distribuidora.png",
+    imagePosition: "center",
+    address: "Oficinas Claro 50 metros este",
+    phone: "8465-7949",
     hours: "Abierto ahora / recogida en el establecimiento",
-    map: "https://maps.google.com/?q=Oficinas+Claro+media+cuadra+al+lago,+Granada,+Nicaragua",
+    map: "https://maps.google.com/?q=Oficinas+Claro+50+metros+este,+Granada,+Nicaragua",
     whatsapp: "https://wa.me/50584657949",
     email: "carnessanmartingranada@gmail.com",
     site: "https://sanmartin.com.ni",
@@ -671,11 +671,10 @@ export default function Home() {
                     Granada
                   </p>
                   <h3 className="mt-4 font-display text-3xl leading-none text-white">
-                    2552-7237
+                    8465-7949
                   </h3>
                   <p className="mt-4 text-sm leading-7 text-[var(--paper-soft)]">
-                    Oficinas Claro media cuadra al lago. WhatsApp directo:
-                    8465-7949.
+                    Oficinas Claro 50 metros este.
                   </p>
                 </article>
 
@@ -751,7 +750,7 @@ export default function Home() {
           </div>
 
           <div className="text-sm leading-7 text-[var(--paper-soft)]">
-            <p>Granada: 2552-7237 / WhatsApp 8465-7949</p>
+            <p>Granada: 8465-7949</p>
             <p>Masaya: 8980-5608</p>
             <p>Nindiri Express: 8888-8888</p>
             <p className="mt-2 text-xs uppercase tracking-[0.22em]">
