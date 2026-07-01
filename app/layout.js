@@ -21,11 +21,11 @@ const accent = Cormorant_Garamond({
 
 export const metadata = {
   title: {
-    default: "Distribuidores SR",
-    template: "%s | Distribuidores SR",
+    default: "Carnes San Martin",
+    template: "%s | Carnes San Martin",
   },
   description:
-    "Distribuidores oficiales de Carnes San Martin con tienda virtual, sucursales en Granada y Masaya, y acceso interno para operacion.",
+    "Sitio informativo de Carnes San Martin con sucursales, distribucion local y contacto directo en Granada, Masaya y Nindiri.",
 };
 
 export default function RootLayout({ children }) {

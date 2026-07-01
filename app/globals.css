@@ -1,19 +1,19 @@
 @import "tailwindcss";
 
 :root {
-  --background: #081214;
-  --foreground: #f5ebdc;
-  --paper: #f5ebdc;
-  --paper-soft: rgba(245, 235, 220, 0.74);
-  --ink: #081214;
-  --ink-soft: #102225;
-  --brand: #b78b4f;
-  --brand-strong: #d7b36f;
-  --ember: #7b3928;
-  --line: rgba(245, 235, 220, 0.12);
-  --line-strong: rgba(245, 235, 220, 0.22);
-  --card: rgba(12, 25, 27, 0.82);
-  --shadow: 0 28px 80px rgba(0, 0, 0, 0.32);
+  --background: #04111d;
+  --foreground: #eef7ff;
+  --paper: #eef7ff;
+  --paper-soft: rgba(238, 247, 255, 0.72);
+  --ink: #04111d;
+  --ink-soft: #0e2437;
+  --brand: #3f9ae4;
+  --brand-strong: #88d2ff;
+  --ember: #13314a;
+  --line: rgba(136, 210, 255, 0.14);
+  --line-strong: rgba(136, 210, 255, 0.3);
+  --card: rgba(9, 24, 39, 0.84);
+  --shadow: 0 28px 80px rgba(0, 0, 0, 0.34);
 }
 
 @theme inline {
@@ -33,9 +33,9 @@ html {
 body {
   min-height: 100vh;
   background:
-    radial-gradient(circle at top, rgba(183, 139, 79, 0.16), transparent 30%),
-    radial-gradient(circle at 86% 8%, rgba(123, 57, 40, 0.14), transparent 24%),
-    linear-gradient(180deg, #112528 0%, #081214 36%, #05090a 100%);
+    radial-gradient(circle at top, rgba(63, 154, 228, 0.2), transparent 30%),
+    radial-gradient(circle at 86% 8%, rgba(136, 210, 255, 0.14), transparent 26%),
+    linear-gradient(180deg, #0d2438 0%, #071624 38%, #04111d 100%);
   color: var(--foreground);
   font-family: var(--font-sans), sans-serif;
 }
@@ -46,8 +46,8 @@ body::before {
   inset: 0;
   pointer-events: none;
   background-image:
-    linear-gradient(rgba(255, 255, 255, 0.024) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.024) 1px, transparent 1px);
+    linear-gradient(rgba(136, 210, 255, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(136, 210, 255, 0.04) 1px, transparent 1px);
   background-size: 72px 72px;
   mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.72), transparent 82%);
   z-index: -2;
@@ -60,8 +60,8 @@ body::after {
   z-index: -1;
   pointer-events: none;
   background:
-    radial-gradient(circle at 20% 24%, rgba(215, 179, 111, 0.08), transparent 18%),
-    radial-gradient(circle at 82% 12%, rgba(123, 57, 40, 0.08), transparent 18%);
+    radial-gradient(circle at 20% 24%, rgba(63, 154, 228, 0.12), transparent 18%),
+    radial-gradient(circle at 82% 12%, rgba(136, 210, 255, 0.08), transparent 18%);
   filter: blur(56px);
   animation: drift 16s ease-in-out infinite alternate;
 }
@@ -152,8 +152,8 @@ video {
 .panel {
   background: linear-gradient(
     180deg,
-    rgba(17, 36, 39, 0.9),
-    rgba(7, 15, 17, 0.88)
+    rgba(11, 30, 49, 0.92),
+    rgba(6, 19, 32, 0.9)
   );
   border: 1px solid var(--line);
   box-shadow: var(--shadow);
@@ -163,10 +163,10 @@ video {
 .panel-soft {
   background: linear-gradient(
     180deg,
-    rgba(17, 36, 39, 0.74),
-    rgba(7, 15, 17, 0.66)
+    rgba(12, 34, 55, 0.76),
+    rgba(7, 20, 33, 0.72)
   );
-  border: 1px solid rgba(245, 235, 220, 0.1);
+  border: 1px solid rgba(136, 210, 255, 0.12);
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
   backdrop-filter: blur(18px);
 }
@@ -180,7 +180,7 @@ video {
 
 .editorial-card:hover {
   transform: translateY(-8px);
-  border-color: rgba(215, 179, 111, 0.36);
+  border-color: rgba(136, 210, 255, 0.38);
   box-shadow: 0 34px 84px rgba(0, 0, 0, 0.32);
 }
 
@@ -189,8 +189,8 @@ video {
   align-items: center;
   gap: 0.75rem;
   border-radius: 999px;
-  border: 1px solid rgba(215, 179, 111, 0.25);
-  background: rgba(215, 179, 111, 0.08);
+  border: 1px solid rgba(136, 210, 255, 0.24);
+  background: rgba(63, 154, 228, 0.08);
   padding: 0.7rem 1rem;
   font-size: 0.74rem;
   letter-spacing: 0.32em;
@@ -218,7 +218,7 @@ video {
   background: linear-gradient(
     90deg,
     transparent,
-    rgba(215, 179, 111, 0.44),
+    rgba(136, 210, 255, 0.44),
     transparent
   );
 }
