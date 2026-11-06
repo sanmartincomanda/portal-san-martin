@@ -519,6 +519,7 @@ export default async function Home() {
             <a href={`${SHOP_URL}/privacidad`}>Privacidad de la tienda</a>
           </div>
         </div>
+
       </footer>
       <script
         type="application/ld+json"
