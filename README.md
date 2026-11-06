@@ -1,36 +1,63 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Carnes San Martin | Sitio comercial
 
-## Getting Started
+Sitio de Distribuidores SR en Next.js App Router. Presenta la marca, sus cortes y las sucursales de Granada, Masaya y Nindiri. La compra ocurre exclusivamente en [tienda.sanmartinsr.com](https://tienda.sanmartinsr.com).
 
-First, run the development server:
+## Ejecutar
 
-```bash
+Requiere Node.js 22 LTS y npm. Desde la raiz del repositorio:
+
+```sh
+npm ci
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Abrir http://localhost:3000. Para revisar la compilacion de produccion:
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+```sh
+npm run build
+npm run start -- --port 3006
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Validar
 
-## Learn More
+```sh
+npm run lint
+npm test
+npm run build
+npm audit --omit=dev
+```
 
-To learn more about Next.js, take a look at the following resources:
+Con el servidor de produccion abierto en otra terminal:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```sh
+npm run test:browser
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+La prueba usa Chrome/Edge/Chromium instalado. Configurar `CHROME_PATH` si no se encuentra automaticamente, y `QA_BASE_URL` para una URL distinta de http://localhost:3006. Las evidencias se guardan en `.codex-artifacts/redesign-qa/`, excluida de Git.
 
-## Deploy on Vercel
+## Contenido e integraciones
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- `app/page.js`: composicion editorial y secciones de la portada.
+- `app/globals.css`: sistema visual, adaptacion movil y animaciones CSS.
+- `components/`: navegacion, lineas, productos, iconos y movimiento progresivo.
+- `lib/site-data.mjs`: enlaces comerciales, contactos y datos estructurados.
+- `lib/catalog.mjs`: consulta GET del catalogo publico, cache de 15 minutos, timeout y respaldo local. No requiere secretos ni escribe pedidos.
+- `public/brand/`: fotografias reales optimizadas y captura de la tienda.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+No se mantiene una copia de precios, stock o checkout. Si se necesita revisar sin red, `CSM_CATALOG_OFFLINE=1` usa la seleccion editorial local; no establecerla en produccion salvo necesidad deliberada.
+
+El portal interno fue eliminado. `/hub` devuelve 404. No hay nuevos servicios de seguimiento: `csm:commerce` es un evento DOM local listo para una futura integracion autorizada.
+
+## Publicar
+
+El repositorio es `sanmartincomanda/portal-san-martin`, rama `main`, y el dominio actual esta alojado en Netlify. El usuario autorizo publicar este rediseño el 5 de noviembre de 2026.
+
+1. Ejecutar las validaciones y revisar el diff, sin incluir secretos ni evidencias locales.
+2. Integrar cualquier cambio remoto sin reescribir el historial.
+3. Crear commit y ejecutar `git push origin main`.
+4. Comprobar el despliegue conectado en Netlify y verificar https://sanmartinsr.com, sus imagenes, enlaces, `/robots.txt`, `/sitemap.xml` y `/hub`.
+5. Si se necesita volver a una version anterior, usar el despliegue previo de Netlify o un `git revert` revisado; no hacer force-push.
+
+No cambiar DNS, autenticacion ni configuracion de la tienda para publicar esta web.
+
+Ver [entrega tecnica](docs/redesign-handoff.md), [recursos de marca](docs/brand-assets.md) y [lista de QA](docs/qa-checklist.md).
