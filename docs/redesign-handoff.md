@@ -41,7 +41,7 @@ Pendientes de material: video gastronomico profesional para portada, FatFrank He
 - Sin desbordamiento horizontal a 320, 360, 390, 768 y 1024 px. Compra visible en primera pantalla de 390 x 844. Capturas revisadas por seccion en escritorio y movil.
 - Pruebas exploratorias: video de 30,72 segundos reproduce/pausa; cero solicitudes MP4 antes de abrirlo. Fallo de imagen externa conserva foto local. Evento comercial de filtro comprobado sin red de seguimiento.
 - Lighthouse 13.6.0, Edge/Chromium, build local de produccion, movil 412 x 823, CPU x4 y Slow 4G simulados: rendimiento 93, accesibilidad 100, buenas practicas 100, SEO 100. LCP 3,3 s, CLS 0, TBT 30 ms en la ultima pasada. Las primeras pasadas dieron rendimiento 92-93 y LCP 3,1-3,3 s.
-- El objetivo LCP < 2,5 s NO se considera alcanzado. INP de usuarios reales no medido; TBT no lo sustituye. Falta validacion de campo, Safari/iOS y dispositivos fisicos.
+- La prueba local no alcanzo el objetivo LCP < 2,5 s. La medicion posterior sobre el dominio publicado se detalla abajo. INP de usuarios reales no medido; TBT no lo sustituye. Falta validacion de campo, Safari/iOS y dispositivos fisicos.
 - Dependencias de produccion: cero vulnerabilidades en `npm audit --omit=dev`. Next.js y eslint-config-next actualizados a 16.4.5. Quedan 8 avisos moderados de herramientas de desarrollo; no se uso `npm audit fix --force` porque proponia cambios incompatibles.
 
 Evidencias locales en `.codex-artifacts/redesign-qa/`, excluidas del repositorio. Las cifras son de laboratorio local, no una promesa de rendimiento de produccion.
@@ -51,3 +51,13 @@ Evidencias locales en `.codex-artifacts/redesign-qa/`, excluidas del repositorio
 Comandos en [README.md](../README.md). El usuario autorizo subir a GitHub y desplegar despues de las pruebas. La publicacion debe conservar el historial de `main` y utilizar el despliegue existente de Netlify, sin alterar DNS, secretos ni la infraestructura de la tienda. Confirmar el contenido real en el dominio despues del push, no solo la existencia del commit.
 
 Fuentes verificadas: [sitio publicado](https://sanmartinsr.com/), [tienda](https://tienda.sanmartinsr.com/), [empresa titular](https://sanmartin.com.ni/en/home/). Direcciones/contactos se conservaron de la version publicada y de los cambios remotos de julio de 2026.
+
+## Publicacion verificada
+
+Se subio el rediseño a `main`, sin force-push, conservando los commits remotos y las fotos originales. Commit de aplicacion publicado: `cc5bb19789b09b2503f80beab41ded2667a61ce4` (incluye `9666f79`). Netlify desplego automaticamente; se verifico visualmente https://sanmartinsr.com con la nueva portada y productos reales. No fue necesario iniciar sesion ni cambiar la configuracion de hosting.
+
+La suite de 12 grupos se repitio contra la URL publica: correcta, con cero infracciones Axe detectadas en escritorio/movil. Inicio, robots, sitemap, hero AVIF y Open Graph responden 200; `/hub` responde 404.
+
+Lighthouse movil sobre el dominio publicado: rendimiento **100**, accesibilidad **100**, buenas practicas **100**, SEO **100**; **LCP 1,4 s**, **CLS 0**, **TBT 20 ms**. Misma emulacion movil Slow 4G/CPU x4 de la prueba local. Es una pasada de laboratorio posterior al despliegue, no una medicion de campo ni garantia para todos los usuarios. En esta pasada publicada se cumplen los objetivos de rendimiento, LCP y CLS; INP sigue pendiente de datos reales.
+
+Reporte completo local: `.codex-artifacts/redesign-qa/lighthouse-live.json`. Pruebas de navegador de produccion: `.codex-artifacts/redesign-qa/browser-results.json`.
